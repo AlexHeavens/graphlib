@@ -1,8 +1,6 @@
-/**
- * 
- */
+
 /**
  * @author Alexander Heavens
  *
  */
-package graphlib;
+package graphlib.adt;
