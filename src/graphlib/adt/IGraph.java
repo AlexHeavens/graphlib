@@ -6,8 +6,14 @@ import graphlib.adt.graph.INode;
 public interface IGraph <N extends INode<N, E, D>, E extends IEdge<N, E, D>, D> {
 
 	public Iterable<N> getNodeSet();
+	
+	public int getNodeCount();
 
 	public Iterable<E> getEdgeSet();
+	
+	public int getEdgeCount();
+	
+	public int getEdgeCount(N node);
 	
 	public Iterable<E> getEdgeSet(N fromNode);
 

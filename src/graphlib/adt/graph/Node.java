@@ -27,4 +27,9 @@ public class Node<D> implements INode<Node<D>, Edge<D>, D> {
 		return data;
 	}
 
+	@Override
+	public int getEdgeCount() {
+		return graph.getEdgeCount(this);
+	}
+
 }

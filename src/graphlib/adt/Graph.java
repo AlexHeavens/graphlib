@@ -30,6 +30,16 @@ public class Graph<T> implements IGraph<Node<T>, Edge<T>, T> {
 	}
 
 	@Override
+	public int getNodeCount() {
+		return nodeSet.size();
+	}
+
+	@Override
+	public Iterable<Edge<T>> getEdgeSet() {
+		return edgeSet;
+	}
+
+	@Override
 	public Iterable<Edge<T>> getEdgeSet(final Node<T> fromNode) {
 		if (!nodeSet.contains(fromNode)) {
 			throw new IllegalArgumentException(
@@ -39,8 +49,13 @@ public class Graph<T> implements IGraph<Node<T>, Edge<T>, T> {
 	}
 
 	@Override
-	public Iterable<Edge<T>> getEdgeSet() {
-		return edgeSet;
+	public int getEdgeCount() {
+		return edgeSet.size();
+	}
+
+	@Override
+	public int getEdgeCount(Node<T> node) {
+		return fromEdgeMap.get(node).size();
 	}
 
 	@Override
