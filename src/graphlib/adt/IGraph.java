@@ -1,0 +1,22 @@
+package graphlib.adt;
+
+import graphlib.adt.graph.IEdge;
+import graphlib.adt.graph.INode;
+
+public interface IGraph <N extends INode<N, E, D>, E extends IEdge<N, E, D>, D> {
+
+	public Iterable<N> getNodeSet();
+
+	public Iterable<E> getEdgeSet();
+	
+	public Iterable<E> getEdgeSet(N fromNode);
+
+	public N getNode(E edge, N toNode);
+
+	public E getEdge(N fromNode, N toNode);
+	
+	public N addNode(D data);
+	
+	public E addEdge(N fromNode, N toNode);
+
+}
