@@ -1,20 +1,20 @@
-package graphlib.adt;
+package net.alexheavens.graphlib.test.adt;
 
 import static org.junit.Assert.*;
-
-import graphlib.adt.graph.AbstractGraph;
-import graphlib.adt.graph.AbstractNode;
-import graphlib.adt.graph.IEdgeBuilder;
-import graphlib.adt.graph.INodeBuilder;
-import graphlib.adt.graph.SimpleEdgeBuilder;
-import graphlib.adt.graph.SimpleGraph;
-import graphlib.adt.graph.SimpleNodeBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 import org.junit.Test;
+
+import net.alexheavens.graphlib.graph.AbstractGraph;
+import net.alexheavens.graphlib.graph.AbstractNode;
+import net.alexheavens.graphlib.graph.EdgeBuilder;
+import net.alexheavens.graphlib.graph.NodeBuilder;
+import net.alexheavens.graphlib.graph.SimpleEdgeBuilder;
+import net.alexheavens.graphlib.graph.SimpleGraph;
+import net.alexheavens.graphlib.graph.SimpleNodeBuilder;
 
 public class AbstractGraphTest {
 
@@ -69,8 +69,8 @@ public class AbstractGraphTest {
 	@Test
 	public void testInvalidBuilders() {
 
-		final INodeBuilder<Integer> testNodeBuilder = new SimpleNodeBuilder<>();
-		final IEdgeBuilder<Integer> testEdgeBuilder = new SimpleEdgeBuilder<>();
+		final NodeBuilder<Integer> testNodeBuilder = new SimpleNodeBuilder<>();
+		final EdgeBuilder<Integer> testEdgeBuilder = new SimpleEdgeBuilder<>();
 
 		try {
 

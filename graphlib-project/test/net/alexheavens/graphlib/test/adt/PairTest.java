@@ -1,8 +1,10 @@
-package graphlib.adt;
+package net.alexheavens.graphlib.test.adt;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import net.alexheavens.graphlib.adt.SimplePair;
 
 public class PairTest {
 
@@ -12,7 +14,7 @@ public class PairTest {
 		final Integer expFirstItem = 47;
 		final Boolean expSecondItem = false;
 
-		Pair<Integer, Boolean> testPair = new Pair<Integer, Boolean>(
+		SimplePair<Integer, Boolean> testPair = new SimplePair<Integer, Boolean>(
 				expFirstItem, expSecondItem);
 
 		final Integer actFirstItem = testPair.getFirstItem();
@@ -26,11 +28,11 @@ public class PairTest {
 	@Test
 	public void testEquals(){
 
-		final Pair<Double, Boolean> pairA = new Pair<>(34.555, false);
-		final Pair<Double, Boolean> pairB = new Pair<>(34.555, false);
-		final Pair<Double, Boolean> pairC = new Pair<>(34.554, false);
-		final Pair<Double, Boolean> pairD = new Pair<>(34.555, true);
-		final Pair<Double, Boolean> pairE = new Pair<>(34.555, null);
+		final SimplePair<Double, Boolean> pairA = new SimplePair<>(34.555, false);
+		final SimplePair<Double, Boolean> pairB = new SimplePair<>(34.555, false);
+		final SimplePair<Double, Boolean> pairC = new SimplePair<>(34.554, false);
+		final SimplePair<Double, Boolean> pairD = new SimplePair<>(34.555, true);
+		final SimplePair<Double, Boolean> pairE = new SimplePair<>(34.555, null);
 		
 		assertEquals(pairA, pairB);
 		assertNotEquals(pairA, pairC);
