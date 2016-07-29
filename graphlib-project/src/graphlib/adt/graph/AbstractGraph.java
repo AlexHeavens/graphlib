@@ -12,13 +12,14 @@ import graphlib.adt.Pair;
  * 
  * @author Alexander Heavens
  *
- * @param <T> Datatype stored at each node in the graph.
+ * @param <T>
+ *            Datatype stored at each node in the graph.
  */
 public abstract class AbstractGraph<T> implements IGraph<AbstractNode<T>, AbstractEdge<T>, T> {
 
 	private final INodeBuilder<T> nodeBuilder;
 	private final IEdgeBuilder<T> edgeBuilder;
-	
+
 	private final Set<AbstractNode<T>> nodeSet;
 	private final Set<AbstractEdge<T>> edgeSet;
 	private final Map<Pair<AbstractNode<T>, AbstractEdge<T>>, AbstractNode<T>> nodeMap;
@@ -26,9 +27,15 @@ public abstract class AbstractGraph<T> implements IGraph<AbstractNode<T>, Abstra
 	private final Map<AbstractNode<T>, Set<AbstractEdge<T>>> fromEdgeMap;
 
 	public AbstractGraph(INodeBuilder<T> nodeBuilder, IEdgeBuilder<T> edgeBuilder) {
+
+		if (nodeBuilder == null)
+			throw new NullPointerException("nodeBuilder");
+		if (edgeBuilder == null)
+			throw new NullPointerException("edgeBuilder");
+
 		this.nodeBuilder = nodeBuilder;
 		this.edgeBuilder = edgeBuilder;
-		
+
 		this.nodeSet = new HashSet<AbstractNode<T>>();
 		this.edgeSet = new HashSet<AbstractEdge<T>>();
 		this.nodeMap = new HashMap<Pair<AbstractNode<T>, AbstractEdge<T>>, AbstractNode<T>>();
@@ -54,8 +61,7 @@ public abstract class AbstractGraph<T> implements IGraph<AbstractNode<T>, Abstra
 	@Override
 	public Iterable<AbstractEdge<T>> getEdgeSet(final AbstractNode<T> fromNode) {
 		if (!nodeSet.contains(fromNode)) {
-			throw new IllegalArgumentException(
-					"Invalid fromNode, does not exist in graph.");
+			throw new IllegalArgumentException("Invalid fromNode, does not exist in graph.");
 		}
 		return fromEdgeMap.get(fromNode);
 	}
@@ -73,27 +79,22 @@ public abstract class AbstractGraph<T> implements IGraph<AbstractNode<T>, Abstra
 	@Override
 	public AbstractNode<T> getNode(final AbstractEdge<T> edge, final AbstractNode<T> toNode) {
 		if (!edgeSet.contains(edge)) {
-			throw new IllegalArgumentException(
-					"Invalid edge, does not exist in graph.");
+			throw new IllegalArgumentException("Invalid edge, does not exist in graph.");
 		}
 		if (!nodeSet.contains(toNode)) {
-			throw new IllegalArgumentException(
-					"Invalid toNode, does not exist in graph.");
+			throw new IllegalArgumentException("Invalid toNode, does not exist in graph.");
 		}
-		Pair<AbstractNode<T>, AbstractEdge<T>> nodeEdgePair = new Pair<AbstractNode<T>, AbstractEdge<T>>(
-				toNode, edge);
+		Pair<AbstractNode<T>, AbstractEdge<T>> nodeEdgePair = new Pair<AbstractNode<T>, AbstractEdge<T>>(toNode, edge);
 		return nodeMap.get(nodeEdgePair);
 	}
 
 	@Override
 	public AbstractEdge<T> getEdge(final AbstractNode<T> fromNode, final AbstractNode<T> toNode) {
 		if (!nodeSet.contains(fromNode)) {
-			throw new IllegalArgumentException(
-					"Invalid fromNode, does not exist in graph.");
+			throw new IllegalArgumentException("Invalid fromNode, does not exist in graph.");
 		}
 		if (!nodeSet.contains(toNode)) {
-			throw new IllegalArgumentException(
-					"Invalid toNode, does not exist in graph.");
+			throw new IllegalArgumentException("Invalid toNode, does not exist in graph.");
 		}
 		final Pair<AbstractNode<T>, AbstractNode<T>> nodePair = new Pair<AbstractNode<T>, AbstractNode<T>>(fromNode,
 				toNode);
@@ -105,10 +106,10 @@ public abstract class AbstractGraph<T> implements IGraph<AbstractNode<T>, Abstra
 
 		final AbstractEdge<T> newEdge = edgeBuilder.buildEdge(this, fromNode, toNode);
 
-		final Pair<AbstractNode<T>, AbstractNode<T>> nodePair = new Pair<AbstractNode<T>, AbstractNode<T>>(
-				fromNode, toNode);
-		final Pair<AbstractNode<T>, AbstractEdge<T>> nodeEdgePair = new Pair<AbstractNode<T>, AbstractEdge<T>>(
-				toNode, newEdge);
+		final Pair<AbstractNode<T>, AbstractNode<T>> nodePair = new Pair<AbstractNode<T>, AbstractNode<T>>(fromNode,
+				toNode);
+		final Pair<AbstractNode<T>, AbstractEdge<T>> nodeEdgePair = new Pair<AbstractNode<T>, AbstractEdge<T>>(toNode,
+				newEdge);
 
 		// Add node to all relevant data structures.
 		edgeSet.add(newEdge);
