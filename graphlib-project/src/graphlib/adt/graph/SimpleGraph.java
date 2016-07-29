@@ -1,4 +1,4 @@
-package graphlib.adt;
+package graphlib.adt.graph;
 
 public class SimpleGraph<Data> extends AbstractGraph<Data> {
 

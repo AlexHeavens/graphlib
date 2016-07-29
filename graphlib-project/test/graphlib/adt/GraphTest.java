@@ -2,7 +2,9 @@ package graphlib.adt;
 
 import static org.junit.Assert.*;
 
+import graphlib.adt.graph.AbstractGraph;
 import graphlib.adt.graph.AbstractNode;
+import graphlib.adt.graph.SimpleGraph;
 
 import java.util.HashMap;
 import java.util.Map;

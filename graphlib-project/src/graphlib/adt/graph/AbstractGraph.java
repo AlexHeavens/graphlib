@@ -1,12 +1,11 @@
-package graphlib.adt;
+package graphlib.adt.graph;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import graphlib.adt.graph.AbstractEdge;
-import graphlib.adt.graph.AbstractNode;
+import graphlib.adt.Pair;
 
 /**
  * Undirected graph containing an associated data object at each node.

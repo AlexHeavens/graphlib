@@ -1,7 +1,4 @@
-package graphlib.adt;
-
-import graphlib.adt.graph.AbstractEdge;
-import graphlib.adt.graph.AbstractNode;
+package graphlib.adt.graph;
 
 public class SimpleEdge<Data> extends AbstractEdge<Data> {
 

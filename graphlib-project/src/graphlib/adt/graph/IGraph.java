@@ -1,7 +1,4 @@
-package graphlib.adt;
-
-import graphlib.adt.graph.IEdge;
-import graphlib.adt.graph.INode;
+package graphlib.adt.graph;
 
 public interface IGraph <N extends INode<N, E, D>, E extends IEdge<N, E, D>, D> {
 

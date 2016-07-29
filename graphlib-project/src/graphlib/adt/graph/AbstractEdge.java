@@ -1,7 +1,5 @@
 package graphlib.adt.graph;
 
-import graphlib.adt.AbstractGraph;
-
 /**
  * Edge component in an undirected abstract graph.
  * 

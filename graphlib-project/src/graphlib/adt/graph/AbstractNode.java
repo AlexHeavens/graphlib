@@ -1,7 +1,5 @@
 package graphlib.adt.graph;
 
-import graphlib.adt.AbstractGraph;
-
 /**
  * Node component of an abstract graph.
  * 
