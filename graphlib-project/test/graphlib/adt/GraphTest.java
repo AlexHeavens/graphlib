@@ -2,7 +2,7 @@ package graphlib.adt;
 
 import static org.junit.Assert.*;
 
-import graphlib.adt.graph.Node;
+import graphlib.adt.graph.AbstractNode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class GraphTest {
 		final int randomSeed = 251545;
 		final Random randomGen = new Random(randomSeed);
 
-		final Graph<Integer> testGraph = new Graph<Integer>();
+		final AbstractGraph<Integer> testGraph = new SimpleGraph<Integer>();
 
 		// Node counts.
 		assertEquals(0, testGraph.getNodeCount());
@@ -32,11 +32,11 @@ public class GraphTest {
 		}
 
 		// Create Nodes.
-		final Map<Integer, Node<Integer>> testNodes = new HashMap<Integer, Node<Integer>>(
+		final Map<Integer, AbstractNode<Integer>> testNodes = new HashMap<Integer, AbstractNode<Integer>>(
 				expNodeCount);
 		for (int i = 0; i < expNodeCount; i++) {
 
-			final Node<Integer> testNode = testGraph.addNode(expNodeData[i]);
+			final AbstractNode<Integer> testNode = testGraph.addNode(expNodeData[i]);
 
 			// Assert correct Node state as added.
 			assertEquals(expNodeData[i], testNode.getData());
@@ -52,7 +52,7 @@ public class GraphTest {
 
 		// Assert correct Node state once added entirely.
 		for (Integer testNodeId : testNodes.keySet()) {
-			final Node<Integer> testNode = testNodes.get(testNodeId);
+			final AbstractNode<Integer> testNode = testNodes.get(testNodeId);
 			
 			// Assert correct Node state as added.
 			assertEquals(expNodeData[testNodeId], testNode.getData());

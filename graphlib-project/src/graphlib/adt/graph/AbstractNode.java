@@ -1,6 +1,6 @@
 package graphlib.adt.graph;
 
-import graphlib.adt.Graph;
+import graphlib.adt.AbstractGraph;
 
 /**
  * Node component of an abstract graph.
@@ -9,23 +9,23 @@ import graphlib.adt.Graph;
  *
  * @param <D> Datatype stored at each node in the graph.
  */
-public class Node<D> implements INode<Node<D>, Edge<D>, D> {
+public abstract class AbstractNode<D> implements INode<AbstractNode<D>, AbstractEdge<D>, D> {
 
-	private final Graph<D> graph;
+	private final AbstractGraph<D> graph;
 	private final D data;
 
-	public Node(final Graph<D> graph, final D data) {
+	public AbstractNode(final AbstractGraph<D> graph, final D data) {
 		this.graph = graph;
 		this.data = data;
 	}
 
 	@Override
-	public Graph<D> getGraph() {
+	public AbstractGraph<D> getGraph() {
 		return graph;
 	}
 
 	@Override
-	public Iterable<Edge<D>> getEdgeSet() {
+	public Iterable<AbstractEdge<D>> getEdgeSet() {
 		return graph.getEdgeSet(this);
 	}
 
