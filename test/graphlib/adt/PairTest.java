@@ -22,5 +22,21 @@ public class PairTest {
 		assertEquals(expSecondItem, actSecondItem);
 
 	}
+	
+	@Test
+	public void testEquals(){
+
+		final Pair<Double, Boolean> pairA = new Pair<>(34.555, false);
+		final Pair<Double, Boolean> pairB = new Pair<>(34.555, false);
+		final Pair<Double, Boolean> pairC = new Pair<>(34.554, false);
+		final Pair<Double, Boolean> pairD = new Pair<>(34.555, true);
+		final Pair<Double, Boolean> pairE = new Pair<>(34.555, null);
+		
+		assertEquals(pairA, pairB);
+		assertNotEquals(pairA, pairC);
+		assertNotEquals(pairA, pairD);
+		assertNotEquals(pairA, pairE);
+		
+	}
 
 }

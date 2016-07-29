@@ -83,7 +83,7 @@ public class Graph<T> implements IGraph<Node<T>, Edge<T>, T> {
 			throw new IllegalArgumentException(
 					"Invalid toNode, does not exist in graph.");
 		}
-		Pair<Node<T>, Node<T>> nodePair = new Pair<Node<T>, Node<T>>(fromNode,
+		final Pair<Node<T>, Node<T>> nodePair = new Pair<Node<T>, Node<T>>(fromNode,
 				toNode);
 		return edgeMap.get(nodePair);
 	}

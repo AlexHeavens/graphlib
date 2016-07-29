@@ -1,6 +1,6 @@
 package graphlib.adt;
 
-import com.sun.org.apache.xalan.internal.utils.Objects;
+import java.util.Objects;
 
 public class Pair<A, B> implements IPair<A, B> {
 
