@@ -2,6 +2,13 @@ package graphlib.adt.graph;
 
 import graphlib.adt.Graph;
 
+/**
+ * Node component of an abstract graph.
+ * 
+ * @author Alexander Heavens
+ *
+ * @param <D> Datatype stored at each node in the graph.
+ */
 public class Node<D> implements INode<Node<D>, Edge<D>, D> {
 
 	private final Graph<D> graph;

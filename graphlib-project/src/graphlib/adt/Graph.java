@@ -8,6 +8,13 @@ import java.util.Set;
 import graphlib.adt.graph.Edge;
 import graphlib.adt.graph.Node;
 
+/**
+ * Undirected graph containing an associated data object at each node.
+ * 
+ * @author Alexander Heavens
+ *
+ * @param <T> Datatype stored at each node in the graph.
+ */
 public class Graph<T> implements IGraph<Node<T>, Edge<T>, T> {
 
 	private final Set<Node<T>> nodeSet;

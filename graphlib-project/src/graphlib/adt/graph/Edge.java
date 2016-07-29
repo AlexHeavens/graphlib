@@ -2,6 +2,13 @@ package graphlib.adt.graph;
 
 import graphlib.adt.Graph;
 
+/**
+ * Edge component in an undirected abstract graph.
+ * 
+ * @author Alexander Heavens
+ *
+ * @param <D> Datatype stored at each node in the graph.
+ */
 public class Edge<D> implements IEdge<Node<D>, Edge<D>, D> {
 
 	private final Graph<D> graph;
