@@ -21,5 +21,7 @@ public interface Graph <NodeClass extends Node<NodeClass, EdgeClass, DataClass>,
 	public NodeClass addNode(DataClass data);
 	
 	public EdgeClass addEdge(NodeClass fromNode, NodeClass toNode);
+	
+	public void removeEdge(EdgeClass edge);
 
 }

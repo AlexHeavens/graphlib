@@ -3,11 +3,17 @@ package net.alexheavens.graphlib.test.adt;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import org.junit.Test;
 
+import net.alexheavens.graphlib.adt.Pair.BidirectionalPair;
+import net.alexheavens.graphlib.adt.Pair.Pair;
+import net.alexheavens.graphlib.adt.Pair.SimpleBidirectionalPair;
+import net.alexheavens.graphlib.graph.AbstractEdge;
 import net.alexheavens.graphlib.graph.AbstractGraph;
 import net.alexheavens.graphlib.graph.AbstractNode;
 import net.alexheavens.graphlib.graph.EdgeBuilder;
@@ -19,9 +25,10 @@ import net.alexheavens.graphlib.graph.SimpleNodeBuilder;
 public class AbstractGraphTest {
 
 	@Test
-	public void testBuildGraph() {
+	public void testBuildConnectedGraph() {
 
-		final int expNodeCount = 100;
+		//// GRAPH CREATION
+		final int expNodeCount = 4;
 		final int randomSeed = 251545;
 		final Random randomGen = new Random(randomSeed);
 
@@ -37,7 +44,7 @@ public class AbstractGraphTest {
 			expNodeData[i] = randomGen.nextInt();
 		}
 
-		// Create Nodes.
+		//// NODE CREATION
 		final Map<Integer, AbstractNode<Integer>> testNodes = new HashMap<Integer, AbstractNode<Integer>>(expNodeCount);
 		for (int i = 0; i < expNodeCount; i++) {
 
@@ -64,6 +71,37 @@ public class AbstractGraphTest {
 			assertTrue(expNodeData[testNodeId] == testNode.getData());
 			assertEquals(0, testNode.getEdgeCount());
 		}
+
+		//// EDGE CREATION (STEP 1)
+		// Fully connect our existing nodes.
+		final Set<BidirectionalPair<AbstractNode<Integer>>> connectedNodePairSet = new HashSet<>();
+		assertEquals(0, testGraph.getEdgeCount());
+
+		for (final AbstractNode<Integer> nodeA : testGraph.getNodeSet()) {
+			for (final AbstractNode<Integer> nodeB : testGraph.getNodeSet()) {
+				final BidirectionalPair<AbstractNode<Integer>> nodeABPair = new SimpleBidirectionalPair<>(nodeA,
+						nodeB);
+				if (nodeA != nodeB && !connectedNodePairSet.contains(nodeABPair)) {
+					
+					final AbstractEdge<Integer> newEdge = testGraph.addEdge(nodeA, nodeB);
+
+					assertEquals(testGraph, newEdge.getGraph());
+					assertEquals(nodeA, newEdge.getFromNode());
+					assertEquals(nodeB, newEdge.getToNode());
+
+					connectedNodePairSet.add(nodeABPair);
+					assertEquals(connectedNodePairSet.size(), testGraph.getEdgeCount());
+					
+					
+
+				}
+
+			}
+		}
+
+		final int totalExpectedEdgeCount = (expNodeCount - 1) * expNodeCount / 2;
+		assertEquals(totalExpectedEdgeCount, testGraph.getEdgeCount());
+		
 	}
 
 	@Test
@@ -82,7 +120,7 @@ public class AbstractGraphTest {
 		} catch (final NullPointerException nullException) {
 			assertEquals("nodeBuilder", nullException.getMessage());
 		}
-		
+
 		try {
 
 			@SuppressWarnings("unused")

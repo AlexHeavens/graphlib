@@ -131,5 +131,10 @@ public abstract class AbstractGraph<DataClass> implements Graph<AbstractNode<Dat
 
 		return newNode;
 	}
+	
+	@Override
+	public void removeEdge(AbstractEdge<DataClass> edge){
+		
+	}
 
 }

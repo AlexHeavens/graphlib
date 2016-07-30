@@ -34,5 +34,10 @@ public class AbstractPair<ClassA, ClassB> implements Pair<ClassA, ClassB> {
 		}
 		return isEqual;
 	}
+	
+	@Override
+	public int hashCode(){
+		return firstItem.hashCode() + secondItem.hashCode();
+	}
 
 }

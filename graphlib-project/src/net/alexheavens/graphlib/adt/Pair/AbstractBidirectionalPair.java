@@ -2,7 +2,7 @@ package net.alexheavens.graphlib.adt.Pair;
 
 import java.util.Objects;
 
-public abstract class AbstractBidirectionalPair<DataClass> extends AbstractPair<DataClass, DataClass> {
+public abstract class AbstractBidirectionalPair<DataClass> extends AbstractPair<DataClass, DataClass> implements BidirectionalPair<DataClass>{
 
 	public AbstractBidirectionalPair(final DataClass firstItem, final DataClass secondItem) {
 		super(firstItem, secondItem);
