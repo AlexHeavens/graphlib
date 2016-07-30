@@ -11,7 +11,6 @@ import java.util.Set;
 import org.junit.Test;
 
 import net.alexheavens.graphlib.adt.Pair.BidirectionalPair;
-import net.alexheavens.graphlib.adt.Pair.Pair;
 import net.alexheavens.graphlib.adt.Pair.SimpleBidirectionalPair;
 import net.alexheavens.graphlib.graph.AbstractEdge;
 import net.alexheavens.graphlib.graph.AbstractGraph;
@@ -23,6 +22,31 @@ import net.alexheavens.graphlib.graph.SimpleGraph;
 import net.alexheavens.graphlib.graph.SimpleNodeBuilder;
 
 public class AbstractGraphTest {
+
+	private AbstractGraph<Integer> generateRandomGraph(int randomSeed, int nodeCount) {
+
+		assert (nodeCount >= 0);
+		
+
+		final Random randomGen = new Random(randomSeed);
+
+		final AbstractGraph<Integer> testGraph = new SimpleGraph<Integer>();
+
+		for (int i = 0; i < nodeCount; i++) {
+			testGraph.addNode(randomGen.nextInt());
+		}
+		
+		for (final AbstractNode<Integer> nodeA : testGraph.getNodeSet()){
+			for (final AbstractNode<Integer> nodeB : testGraph.getNodeSet()){
+			  if(nodeA != nodeB && randomGen.nextBoolean()){
+				  testGraph.addEdge(nodeA, nodeB);
+			  }
+			}
+		}
+		
+		return testGraph;
+
+	}
 
 	@Test
 	public void testBuildConnectedGraph() {
@@ -79,10 +103,9 @@ public class AbstractGraphTest {
 
 		for (final AbstractNode<Integer> nodeA : testGraph.getNodeSet()) {
 			for (final AbstractNode<Integer> nodeB : testGraph.getNodeSet()) {
-				final BidirectionalPair<AbstractNode<Integer>> nodeABPair = new SimpleBidirectionalPair<>(nodeA,
-						nodeB);
+				final BidirectionalPair<AbstractNode<Integer>> nodeABPair = new SimpleBidirectionalPair<>(nodeA, nodeB);
 				if (nodeA != nodeB && !connectedNodePairSet.contains(nodeABPair)) {
-					
+
 					final AbstractEdge<Integer> newEdge = testGraph.addEdge(nodeA, nodeB);
 
 					assertEquals(testGraph, newEdge.getGraph());
@@ -91,8 +114,6 @@ public class AbstractGraphTest {
 
 					connectedNodePairSet.add(nodeABPair);
 					assertEquals(connectedNodePairSet.size(), testGraph.getEdgeCount());
-					
-					
 
 				}
 
@@ -101,7 +122,7 @@ public class AbstractGraphTest {
 
 		final int totalExpectedEdgeCount = (expNodeCount - 1) * expNodeCount / 2;
 		assertEquals(totalExpectedEdgeCount, testGraph.getEdgeCount());
-		
+
 	}
 
 	@Test
@@ -132,6 +153,25 @@ public class AbstractGraphTest {
 			assertEquals("edgeBuilder", nullException.getMessage());
 		}
 
+	}
+
+	@Test
+	public void testGetEdgeSet() {
+		
+		final int randomSeed = 77576578;
+		final int nodeCount = 20;
+		final AbstractGraph<Integer> testGraph = generateRandomGraph(randomSeed, nodeCount);
+		
+		// Must always get a new (but identical) Set when retrieving edges.
+		final Set<AbstractEdge<Integer>> edgeSetA = testGraph.getEdgeSet();
+		final Set<AbstractEdge<Integer>> edgeSetB = testGraph.getEdgeSet();
+		
+		assertFalse(edgeSetA == edgeSetB);
+		assertEquals(edgeSetA,edgeSetB);
+		
+		// Difficult to do stringent edge checks with random graph.
+		assertEquals(testGraph.getEdgeCount(), edgeSetA.size());
+		
 	}
 
 }

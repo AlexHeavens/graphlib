@@ -1,5 +1,8 @@
 package net.alexheavens.graphlib.graph;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Node component of an abstract graph.
  * 
@@ -23,7 +26,7 @@ public abstract class AbstractNode<DataClass> implements Node<AbstractNode<DataC
 	}
 
 	@Override
-	public Iterable<AbstractEdge<DataClass>> getEdgeSet() {
+	public Set<AbstractEdge<DataClass>> getEdgeSet() {
 		return graph.getEdgeSet(this);
 	}
 

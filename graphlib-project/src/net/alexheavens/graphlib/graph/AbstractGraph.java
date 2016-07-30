@@ -54,16 +54,16 @@ public abstract class AbstractGraph<DataClass> implements Graph<AbstractNode<Dat
 	}
 
 	@Override
-	public Iterable<AbstractEdge<DataClass>> getEdgeSet() {
-		return edgeSet;
+	public Set<AbstractEdge<DataClass>> getEdgeSet() {
+		return new HashSet<AbstractEdge<DataClass>>(edgeSet);
 	}
 
 	@Override
-	public Iterable<AbstractEdge<DataClass>> getEdgeSet(final AbstractNode<DataClass> fromNode) {
+	public Set<AbstractEdge<DataClass>> getEdgeSet(final AbstractNode<DataClass> fromNode) {
 		if (!nodeSet.contains(fromNode)) {
 			throw new IllegalArgumentException("Invalid fromNode, does not exist in graph.");
 		}
-		return fromEdgeMap.get(fromNode);
+		return new HashSet<AbstractEdge<DataClass>>(fromEdgeMap.get(fromNode));
 	}
 
 	@Override
