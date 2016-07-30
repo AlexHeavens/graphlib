@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import net.alexheavens.graphlib.adt.AbstractPair;
-import net.alexheavens.graphlib.adt.SimplePair;
+import net.alexheavens.graphlib.adt.Pair.AbstractPair;
+import net.alexheavens.graphlib.adt.Pair.SimplePair;
 
 public class AbstractPairTest {
 

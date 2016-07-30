@@ -1,4 +1,4 @@
-package net.alexheavens.graphlib.adt;
+package net.alexheavens.graphlib.adt.Pair;
 
 public interface Pair<ClassA, ClassB> {
 

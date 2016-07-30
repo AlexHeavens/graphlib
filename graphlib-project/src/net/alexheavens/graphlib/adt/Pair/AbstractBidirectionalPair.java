@@ -1,4 +1,4 @@
-package net.alexheavens.graphlib.adt;
+package net.alexheavens.graphlib.adt.Pair;
 
 import java.util.Objects;
 
