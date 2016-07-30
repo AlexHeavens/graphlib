@@ -33,11 +33,15 @@ public class PairTest {
 		final SimplePair<Double, Boolean> pairC = new SimplePair<>(34.554, false);
 		final SimplePair<Double, Boolean> pairD = new SimplePair<>(34.555, true);
 		final SimplePair<Double, Boolean> pairE = new SimplePair<>(34.555, null);
+		final SimplePair<Boolean, Double> pairF = new SimplePair<>(false, 34.555);
+		
+		assertEquals(pairA, pairA);
 		
 		assertEquals(pairA, pairB);
 		assertNotEquals(pairA, pairC);
 		assertNotEquals(pairA, pairD);
 		assertNotEquals(pairA, pairE);
+		assertNotEquals(pairA, pairF);
 		
 	}
 
