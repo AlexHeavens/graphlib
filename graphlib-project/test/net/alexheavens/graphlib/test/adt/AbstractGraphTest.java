@@ -26,7 +26,6 @@ public class AbstractGraphTest {
 	private AbstractGraph<Integer> generateRandomGraph(int randomSeed, int nodeCount) {
 
 		assert (nodeCount >= 0);
-		
 
 		final Random randomGen = new Random(randomSeed);
 
@@ -35,15 +34,15 @@ public class AbstractGraphTest {
 		for (int i = 0; i < nodeCount; i++) {
 			testGraph.addNode(randomGen.nextInt());
 		}
-		
-		for (final AbstractNode<Integer> nodeA : testGraph.getNodeSet()){
-			for (final AbstractNode<Integer> nodeB : testGraph.getNodeSet()){
-			  if(nodeA != nodeB && randomGen.nextBoolean()){
-				  testGraph.addEdge(nodeA, nodeB);
-			  }
+
+		for (final AbstractNode<Integer> nodeA : testGraph.getNodeSet()) {
+			for (final AbstractNode<Integer> nodeB : testGraph.getNodeSet()) {
+				if (nodeA != nodeB && randomGen.nextBoolean()) {
+					testGraph.addEdge(nodeA, nodeB);
+				}
 			}
 		}
-		
+
 		return testGraph;
 
 	}
@@ -157,21 +156,40 @@ public class AbstractGraphTest {
 
 	@Test
 	public void testGetEdgeSet() {
-		
+
 		final int randomSeed = 77576578;
 		final int nodeCount = 20;
 		final AbstractGraph<Integer> testGraph = generateRandomGraph(randomSeed, nodeCount);
-		
+
 		// Must always get a new (but identical) Set when retrieving edges.
 		final Set<AbstractEdge<Integer>> edgeSetA = testGraph.getEdgeSet();
 		final Set<AbstractEdge<Integer>> edgeSetB = testGraph.getEdgeSet();
-		
+
 		assertFalse(edgeSetA == edgeSetB);
-		assertEquals(edgeSetA,edgeSetB);
-		
+		assertEquals(edgeSetA, edgeSetB);
+
 		// Difficult to do stringent edge checks with random graph.
 		assertEquals(testGraph.getEdgeCount(), edgeSetA.size());
-		
+
+	}
+
+	@Test
+	public void testGetNodeSet() {
+
+		final int randomSeed = 2345645;
+		final int nodeCount = 20;
+		final AbstractGraph<Integer> testGraph = generateRandomGraph(randomSeed, nodeCount);
+
+		// Must always get a new (but identical) Set when retrieving edges.
+		final Set<AbstractNode<Integer>> nodeSetA = testGraph.getNodeSet();
+		final Set<AbstractNode<Integer>> nodeSetB = testGraph.getNodeSet();
+
+		assertFalse(nodeSetA == nodeSetB);
+		assertEquals(nodeSetA, nodeSetB);
+
+		// Difficult to do stringent edge checks with random graph.
+		assertEquals(testGraph.getNodeCount(), nodeSetA.size());
+
 	}
 
 }

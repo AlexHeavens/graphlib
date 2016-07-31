@@ -15,7 +15,8 @@ import net.alexheavens.graphlib.adt.Pair.SimplePair;
  * @param <DataClass>
  *            Datatype stored at each node in the graph.
  */
-public abstract class AbstractGraph<DataClass> implements Graph<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
+public abstract class AbstractGraph<DataClass>
+		implements Graph<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
 
 	private final NodeBuilder<DataClass> nodeBuilder;
 	private final EdgeBuilder<DataClass> edgeBuilder;
@@ -36,16 +37,16 @@ public abstract class AbstractGraph<DataClass> implements Graph<AbstractNode<Dat
 		this.nodeBuilder = nodeBuilder;
 		this.edgeBuilder = edgeBuilder;
 
-		this.nodeSet = new HashSet<AbstractNode<DataClass>>();
-		this.edgeSet = new HashSet<AbstractEdge<DataClass>>();
-		this.nodeMap = new HashMap<SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>>, AbstractNode<DataClass>>();
-		this.edgeMap = new HashMap<SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>>, AbstractEdge<DataClass>>();
-		this.fromEdgeMap = new HashMap<AbstractNode<DataClass>, Set<AbstractEdge<DataClass>>>();
+		this.nodeSet = new HashSet<>();
+		this.edgeSet = new HashSet<>();
+		this.nodeMap = new HashMap<>();
+		this.edgeMap = new HashMap<>();
+		this.fromEdgeMap = new HashMap<>();
 	}
 
 	@Override
-	public Iterable<AbstractNode<DataClass>> getNodeSet() {
-		return nodeSet;
+	public Set<AbstractNode<DataClass>> getNodeSet() {
+		return new HashSet<>(nodeSet);
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public abstract class AbstractGraph<DataClass> implements Graph<AbstractNode<Dat
 
 	@Override
 	public Set<AbstractEdge<DataClass>> getEdgeSet() {
-		return new HashSet<AbstractEdge<DataClass>>(edgeSet);
+		return new HashSet<>(edgeSet);
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public abstract class AbstractGraph<DataClass> implements Graph<AbstractNode<Dat
 		if (!nodeSet.contains(fromNode)) {
 			throw new IllegalArgumentException("Invalid fromNode, does not exist in graph.");
 		}
-		return new HashSet<AbstractEdge<DataClass>>(fromEdgeMap.get(fromNode));
+		return new HashSet<>(fromEdgeMap.get(fromNode));
 	}
 
 	@Override
@@ -84,32 +85,35 @@ public abstract class AbstractGraph<DataClass> implements Graph<AbstractNode<Dat
 		if (!nodeSet.contains(toNode)) {
 			throw new IllegalArgumentException("Invalid toNode, does not exist in graph.");
 		}
-		SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>> nodeEdgePair = new SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>>(toNode, edge);
+		final SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>> nodeEdgePair = new SimplePair<>(
+				toNode, edge);
 		return nodeMap.get(nodeEdgePair);
 	}
 
 	@Override
-	public AbstractEdge<DataClass> getEdge(final AbstractNode<DataClass> fromNode, final AbstractNode<DataClass> toNode) {
+	public AbstractEdge<DataClass> getEdge(final AbstractNode<DataClass> fromNode,
+			final AbstractNode<DataClass> toNode) {
 		if (!nodeSet.contains(fromNode)) {
 			throw new IllegalArgumentException("Invalid fromNode, does not exist in graph.");
 		}
 		if (!nodeSet.contains(toNode)) {
 			throw new IllegalArgumentException("Invalid toNode, does not exist in graph.");
 		}
-		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>>(fromNode,
-				toNode);
+		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<>(
+				fromNode, toNode);
 		return edgeMap.get(nodePair);
 	}
 
 	@Override
-	public AbstractEdge<DataClass> addEdge(final AbstractNode<DataClass> fromNode, final AbstractNode<DataClass> toNode) {
+	public AbstractEdge<DataClass> addEdge(final AbstractNode<DataClass> fromNode,
+			final AbstractNode<DataClass> toNode) {
 
 		final AbstractEdge<DataClass> newEdge = edgeBuilder.buildEdge(this, fromNode, toNode);
 
-		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>>(fromNode,
-				toNode);
-		final SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>> nodeEdgePair = new SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>>(toNode,
-				newEdge);
+		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<>(
+				fromNode, toNode);
+		final SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>> nodeEdgePair = new SimplePair<>(
+				toNode, newEdge);
 
 		// Add node to all relevant data structures.
 		edgeSet.add(newEdge);
@@ -131,10 +135,10 @@ public abstract class AbstractGraph<DataClass> implements Graph<AbstractNode<Dat
 
 		return newNode;
 	}
-	
+
 	@Override
-	public void removeEdge(AbstractEdge<DataClass> edge){
-		
+	public void removeEdge(AbstractEdge<DataClass> edge) {
+
 	}
 
 }

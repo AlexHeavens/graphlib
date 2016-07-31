@@ -4,7 +4,7 @@ import java.util.Set;
 
 public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, DataClass>, EdgeClass extends Edge<NodeClass, EdgeClass, DataClass>, DataClass> {
 
-	public Iterable<NodeClass> getNodeSet();
+	public Set<NodeClass> getNodeSet();
 
 	public int getNodeCount();
 
