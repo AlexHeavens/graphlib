@@ -2,12 +2,38 @@ package net.alexheavens.graphlib.graph;
 
 import java.util.Set;
 
+/**
+ * 
+ * @author Alexander Heavens (alexander.heavens@gmail.com)
+ *
+ * @param <NodeClass>
+ * @param <EdgeClass>
+ * @param <DataClass>
+ */
 public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, DataClass>, EdgeClass extends Edge<NodeClass, EdgeClass, DataClass>, DataClass> {
 
+	/**
+	 * <p>
+	 * Return a copy of the {@link java.util.Set Set} of {@link Node Nodes}
+	 * across the whole Graph.
+	 * </p>
+	 * 
+	 * @return New, full copy of the {@link java.util.Set Set} of {@link Node
+	 *         Nodes} attached to the Graph.
+	 */
 	public Set<NodeClass> getNodeSet();
 
 	public int getNodeCount();
 
+	/**
+	 * <p>
+	 * Return a copy of the Set of {@link Edge Edges} attached to the Graph.
+	 * </p>
+	 * </p>
+	 * 
+	 * @return New, full copy of the {@link java.util.Set Set} of {@link Edge
+	 *         Edges} attached to the Graph.
+	 */
 	public Set<EdgeClass> getEdgeSet();
 
 	public int getEdgeCount();
@@ -15,8 +41,10 @@ public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, DataClass>, 
 	public int getEdgeCount(NodeClass node);
 
 	/**
+	 * <p>
 	 * Return a copy of the Set of {@link Edge Edges} attached to a particular
 	 * {@link Node Node}.
+	 * </p>
 	 * 
 	 * @param fromNode
 	 *            Node from which the set of Edges is returned.
