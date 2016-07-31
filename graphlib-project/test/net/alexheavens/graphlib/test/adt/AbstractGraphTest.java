@@ -10,8 +10,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import net.alexheavens.graphlib.adt.Pair.BidirectionalPair;
-import net.alexheavens.graphlib.adt.Pair.SimpleBidirectionalPair;
+import net.alexheavens.graphlib.adt.pair.BidirectionalPair;
+import net.alexheavens.graphlib.adt.pair.SimpleBidirectionalPair;
 import net.alexheavens.graphlib.graph.AbstractEdge;
 import net.alexheavens.graphlib.graph.AbstractGraph;
 import net.alexheavens.graphlib.graph.AbstractNode;

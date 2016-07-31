@@ -1,4 +1,4 @@
-package net.alexheavens.graphlib.adt.Pair;
+package net.alexheavens.graphlib.adt.pair;
 
 public class SimplePair<ClassA, ClassB> extends AbstractPair<ClassA, ClassB> {
 

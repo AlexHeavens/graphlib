@@ -1,4 +1,4 @@
-package net.alexheavens.graphlib.adt.Pair;
+package net.alexheavens.graphlib.adt.pair;
 
 import net.alexheavens.graphlib.adt.AbstractDataType;
 

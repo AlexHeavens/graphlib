@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import net.alexheavens.graphlib.adt.Pair.AbstractBidirectionalPair;
-import net.alexheavens.graphlib.adt.Pair.SimpleBidirectionalPair;
+import net.alexheavens.graphlib.adt.pair.AbstractBidirectionalPair;
+import net.alexheavens.graphlib.adt.pair.SimpleBidirectionalPair;
 
 public class AbstractBidirectionalPairTest {
 

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import net.alexheavens.graphlib.adt.Pair.SimplePair;
+import net.alexheavens.graphlib.adt.pair.SimplePair;
 
 /**
  * Undirected graph containing an associated data object at each node.
