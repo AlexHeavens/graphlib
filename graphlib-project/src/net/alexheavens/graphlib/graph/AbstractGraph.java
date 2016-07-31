@@ -19,7 +19,7 @@ public abstract class AbstractGraph<DataClass>
 		implements Graph<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
 
 	private final NodeBuilder<DataClass> nodeBuilder;
-	private final EdgeBuilder<DataClass> edgeBuilder;
+	private final EdgeFactory<DataClass> edgeBuilder;
 
 	private final Set<AbstractNode<DataClass>> nodeSet;
 	private final Set<AbstractEdge<DataClass>> edgeSet;
@@ -32,7 +32,7 @@ public abstract class AbstractGraph<DataClass>
 	 * @param nodeBuilder
 	 * @param edgeBuilder
 	 */
-	public AbstractGraph(NodeBuilder<DataClass> nodeBuilder, EdgeBuilder<DataClass> edgeBuilder) {
+	public AbstractGraph(NodeBuilder<DataClass> nodeBuilder, EdgeFactory<DataClass> edgeBuilder) {
 
 		if (nodeBuilder == null)
 			throw new NullPointerException("nodeBuilder");
@@ -113,7 +113,7 @@ public abstract class AbstractGraph<DataClass>
 	public AbstractEdge<DataClass> addEdge(final AbstractNode<DataClass> fromNode,
 			final AbstractNode<DataClass> toNode) {
 
-		final AbstractEdge<DataClass> newEdge = edgeBuilder.buildEdge(this, fromNode, toNode);
+		final AbstractEdge<DataClass> newEdge = edgeBuilder.generate(this, fromNode, toNode);
 
 		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<>(
 				fromNode, toNode);

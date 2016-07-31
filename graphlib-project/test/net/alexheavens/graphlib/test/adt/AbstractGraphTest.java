@@ -15,7 +15,7 @@ import net.alexheavens.graphlib.adt.pair.SimpleBidirectionalPair;
 import net.alexheavens.graphlib.graph.AbstractEdge;
 import net.alexheavens.graphlib.graph.AbstractGraph;
 import net.alexheavens.graphlib.graph.AbstractNode;
-import net.alexheavens.graphlib.graph.EdgeBuilder;
+import net.alexheavens.graphlib.graph.EdgeFactory;
 import net.alexheavens.graphlib.graph.NodeBuilder;
 import net.alexheavens.graphlib.graph.SimpleEdgeBuilder;
 import net.alexheavens.graphlib.graph.SimpleGraph;
@@ -128,7 +128,7 @@ public class AbstractGraphTest {
 	public void testInvalidBuilders() {
 
 		final NodeBuilder<Integer> testNodeBuilder = new SimpleNodeBuilder<>();
-		final EdgeBuilder<Integer> testEdgeBuilder = new SimpleEdgeBuilder<>();
+		final EdgeFactory<Integer> testEdgeBuilder = new SimpleEdgeBuilder<>();
 
 		try {
 
