@@ -2,6 +2,8 @@ package net.alexheavens.graphlib.graph;
 
 import java.util.Set;
 
+import net.alexheavens.graphlib.adt.AbstractDataType;
+
 /**
  * 
  * @author Alexander Heavens (alexander.heavens@gmail.com)
@@ -10,7 +12,8 @@ import java.util.Set;
  * @param <EdgeClass>
  * @param <DataClass>
  */
-public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, DataClass>, EdgeClass extends Edge<NodeClass, EdgeClass, DataClass>, DataClass> {
+public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, DataClass>, EdgeClass extends Edge<NodeClass, EdgeClass, DataClass>, DataClass>
+		extends AbstractDataType {
 
 	/**
 	 * <p>

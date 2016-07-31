@@ -26,7 +26,12 @@ public abstract class AbstractGraph<DataClass>
 	private final Map<SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>>, AbstractNode<DataClass>> nodeMap;
 	private final Map<SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>>, AbstractEdge<DataClass>> edgeMap;
 	private final Map<AbstractNode<DataClass>, Set<AbstractEdge<DataClass>>> fromEdgeMap;
-
+	
+	/**
+	 * 
+	 * @param nodeBuilder
+	 * @param edgeBuilder
+	 */
 	public AbstractGraph(NodeBuilder<DataClass> nodeBuilder, EdgeBuilder<DataClass> edgeBuilder) {
 
 		if (nodeBuilder == null)
@@ -138,7 +143,7 @@ public abstract class AbstractGraph<DataClass>
 
 	@Override
 	public void removeEdge(AbstractEdge<DataClass> edge) {
-
+		assert(false); // TODO implement
 	}
 
 }
