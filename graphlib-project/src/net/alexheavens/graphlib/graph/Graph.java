@@ -65,4 +65,15 @@ public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, DataClass>, 
 
 	public void removeEdge(EdgeClass edge);
 
+	/**
+	 * <p>
+	 * If the Graph contains a particular {@link Node node}.
+	 * </p>
+	 * 
+	 * @param node
+	 *            Node to check for.
+	 * @return If node is within the graph.
+	 */
+	public boolean containsNode(NodeClass node);
+
 }

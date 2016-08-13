@@ -16,10 +16,10 @@ import net.alexheavens.graphlib.graph.AbstractEdge;
 import net.alexheavens.graphlib.graph.AbstractGraph;
 import net.alexheavens.graphlib.graph.AbstractNode;
 import net.alexheavens.graphlib.graph.EdgeFactory;
-import net.alexheavens.graphlib.graph.NodeBuilder;
+import net.alexheavens.graphlib.graph.AbstractNodeFactory;
 import net.alexheavens.graphlib.graph.SimpleEdgeBuilder;
 import net.alexheavens.graphlib.graph.SimpleGraph;
-import net.alexheavens.graphlib.graph.SimpleNodeBuilder;
+import net.alexheavens.graphlib.graph.SimpleNodeFactory;
 
 public class AbstractGraphTest {
 
@@ -127,7 +127,7 @@ public class AbstractGraphTest {
 	@Test
 	public void testInvalidBuilders() {
 
-		final NodeBuilder<Integer> testNodeBuilder = new SimpleNodeBuilder<>();
+		final AbstractNodeFactory<Integer> testNodeBuilder = new SimpleNodeFactory<>();
 		final EdgeFactory<Integer> testEdgeBuilder = new SimpleEdgeBuilder<>();
 
 		try {

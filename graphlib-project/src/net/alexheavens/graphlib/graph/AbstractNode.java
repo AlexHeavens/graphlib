@@ -8,9 +8,11 @@ import java.util.Set;
  * 
  * @author Alexander Heavens
  *
- * @param <DataClass> Datatype stored at each node in the graph.
+ * @param <DataClass>
+ *            Datatype stored at each node in the graph.
  */
-public abstract class AbstractNode<DataClass> implements Node<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
+public abstract class AbstractNode<DataClass>
+		implements Node<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
 
 	private final AbstractGraph<DataClass> graph;
 	private final DataClass data;
@@ -20,6 +22,10 @@ public abstract class AbstractNode<DataClass> implements Node<AbstractNode<DataC
 		this.data = data;
 	}
 
+	private boolean isAttached() {
+		return graph.containsNode(this);
+	}
+
 	@Override
 	public AbstractGraph<DataClass> getGraph() {
 		return graph;
@@ -27,7 +33,16 @@ public abstract class AbstractNode<DataClass> implements Node<AbstractNode<DataC
 
 	@Override
 	public Set<AbstractEdge<DataClass>> getEdgeSet() {
-		return graph.getEdgeSet(this);
+
+		final Set<AbstractEdge<DataClass>> edgeSet;
+		if (isAttached()) {
+			edgeSet = graph.getEdgeSet();
+		} else {
+			edgeSet = new HashSet<>(0);
+		}
+
+		return edgeSet;
+
 	}
 
 	@Override
@@ -37,7 +52,16 @@ public abstract class AbstractNode<DataClass> implements Node<AbstractNode<DataC
 
 	@Override
 	public int getEdgeCount() {
-		return graph.getEdgeCount(this);
+
+		final int edgeCount;
+		if (isAttached()) {
+			edgeCount = graph.getEdgeCount();
+		} else {
+			edgeCount = 0;
+		}
+
+		return edgeCount;
+
 	}
 
 }

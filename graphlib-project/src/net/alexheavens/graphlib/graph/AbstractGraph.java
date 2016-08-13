@@ -18,7 +18,7 @@ import net.alexheavens.graphlib.adt.pair.SimplePair;
 public abstract class AbstractGraph<DataClass>
 		implements Graph<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
 
-	private final NodeBuilder<DataClass> nodeBuilder;
+	private final AbstractNodeFactory<DataClass> nodeFactory;
 	private final EdgeFactory<DataClass> edgeBuilder;
 
 	private final Set<AbstractNode<DataClass>> nodeSet;
@@ -26,20 +26,22 @@ public abstract class AbstractGraph<DataClass>
 	private final Map<SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>>, AbstractNode<DataClass>> nodeMap;
 	private final Map<SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>>, AbstractEdge<DataClass>> edgeMap;
 	private final Map<AbstractNode<DataClass>, Set<AbstractEdge<DataClass>>> fromEdgeMap;
-	
+
 	/**
 	 * 
-	 * @param nodeBuilder
+	 * @param nodeFactory
+	 *            Factory to produce consumer-specific Nodes on behalf of the
+	 *            Graph.
 	 * @param edgeBuilder
 	 */
-	public AbstractGraph(NodeBuilder<DataClass> nodeBuilder, EdgeFactory<DataClass> edgeBuilder) {
+	public AbstractGraph(AbstractNodeFactory<DataClass> nodeFactory, EdgeFactory<DataClass> edgeBuilder) {
 
-		if (nodeBuilder == null)
+		if (nodeFactory == null)
 			throw new NullPointerException("nodeBuilder");
 		if (edgeBuilder == null)
 			throw new NullPointerException("edgeBuilder");
 
-		this.nodeBuilder = nodeBuilder;
+		this.nodeFactory = nodeFactory;
 		this.edgeBuilder = edgeBuilder;
 
 		this.nodeSet = new HashSet<>();
@@ -90,8 +92,8 @@ public abstract class AbstractGraph<DataClass>
 		if (!nodeSet.contains(toNode)) {
 			throw new IllegalArgumentException("Invalid toNode, does not exist in graph.");
 		}
-		final SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>> nodeEdgePair = new SimplePair<>(
-				toNode, edge);
+		final SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>> nodeEdgePair = new SimplePair<>(toNode,
+				edge);
 		return nodeMap.get(nodeEdgePair);
 	}
 
@@ -104,8 +106,8 @@ public abstract class AbstractGraph<DataClass>
 		if (!nodeSet.contains(toNode)) {
 			throw new IllegalArgumentException("Invalid toNode, does not exist in graph.");
 		}
-		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<>(
-				fromNode, toNode);
+		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<>(fromNode,
+				toNode);
 		return edgeMap.get(nodePair);
 	}
 
@@ -115,10 +117,10 @@ public abstract class AbstractGraph<DataClass>
 
 		final AbstractEdge<DataClass> newEdge = edgeBuilder.generate(this, fromNode, toNode);
 
-		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<>(
-				fromNode, toNode);
-		final SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>> nodeEdgePair = new SimplePair<>(
-				toNode, newEdge);
+		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<>(fromNode,
+				toNode);
+		final SimplePair<AbstractNode<DataClass>, AbstractEdge<DataClass>> nodeEdgePair = new SimplePair<>(toNode,
+				newEdge);
 
 		// Add node to all relevant data structures.
 		edgeSet.add(newEdge);
@@ -132,7 +134,9 @@ public abstract class AbstractGraph<DataClass>
 	@Override
 	public AbstractNode<DataClass> addNode(final DataClass data) {
 
-		final AbstractNode<DataClass> newNode = nodeBuilder.buildNode(this, data);
+		final AbstractNodeFactoryParameterSet<DataClass> nodeGenParams = new AbstractNodeFactoryParameterSet<>(this,
+				data);
+		final AbstractNode<DataClass> newNode = nodeFactory.generate(nodeGenParams);
 
 		// Add edge to all relevant data structure.
 		nodeSet.add(newNode);
@@ -143,7 +147,12 @@ public abstract class AbstractGraph<DataClass>
 
 	@Override
 	public void removeEdge(AbstractEdge<DataClass> edge) {
-		assert(false); // TODO implement
+		assert (false); // TODO implement
+	}
+
+	@Override
+	public boolean containsNode(AbstractNode<DataClass> node) {
+		return nodeSet.contains(node);
 	}
 
 }
