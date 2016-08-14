@@ -5,7 +5,6 @@ import net.alexheavens.graphlib.adt.factory.AbstractDataTypeFactory;
 public interface EdgeFactory<DataClass>
 		extends AbstractDataTypeFactory<AbstractEdge<DataClass>, AbstractEdgeFactoryParameterSet<DataClass>> {
 
-	public AbstractEdge<DataClass> generate(AbstractGraph<DataClass> graph, AbstractNode<DataClass> fromNode,
-			AbstractNode<DataClass> toNode);
+	public AbstractEdge<DataClass> generate(AbstractEdgeFactoryParameterSet<DataClass> generateParameters);
 
 }

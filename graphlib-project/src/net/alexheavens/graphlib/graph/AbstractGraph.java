@@ -19,7 +19,7 @@ public abstract class AbstractGraph<DataClass>
 		implements Graph<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
 
 	private final AbstractNodeFactory<DataClass> nodeFactory;
-	private final EdgeFactory<DataClass> edgeBuilder;
+	private final EdgeFactory<DataClass> edgeFactory;
 
 	private final Set<AbstractNode<DataClass>> nodeSet;
 	private final Set<AbstractEdge<DataClass>> edgeSet;
@@ -32,17 +32,17 @@ public abstract class AbstractGraph<DataClass>
 	 * @param nodeFactory
 	 *            Factory to produce consumer-specific Nodes on behalf of the
 	 *            Graph.
-	 * @param edgeBuilder
+	 * @param edgeFactory
 	 */
-	public AbstractGraph(AbstractNodeFactory<DataClass> nodeFactory, EdgeFactory<DataClass> edgeBuilder) {
+	public AbstractGraph(AbstractNodeFactory<DataClass> nodeFactory, EdgeFactory<DataClass> edgeFactory) {
 
 		if (nodeFactory == null)
 			throw new NullPointerException("nodeBuilder");
-		if (edgeBuilder == null)
+		if (edgeFactory == null)
 			throw new NullPointerException("edgeBuilder");
 
 		this.nodeFactory = nodeFactory;
-		this.edgeBuilder = edgeBuilder;
+		this.edgeFactory = edgeFactory;
 
 		this.nodeSet = new HashSet<>();
 		this.edgeSet = new HashSet<>();
@@ -115,7 +115,9 @@ public abstract class AbstractGraph<DataClass>
 	public AbstractEdge<DataClass> addEdge(final AbstractNode<DataClass> fromNode,
 			final AbstractNode<DataClass> toNode) {
 
-		final AbstractEdge<DataClass> newEdge = edgeBuilder.generate(this, fromNode, toNode);
+		final AbstractEdgeFactoryParameterSet<DataClass> edgeParameters = new AbstractEdgeFactoryParameterSet<>(
+				fromNode, toNode);
+		final AbstractEdge<DataClass> newEdge = edgeFactory.generate(edgeParameters);
 
 		final SimplePair<AbstractNode<DataClass>, AbstractNode<DataClass>> nodePair = new SimplePair<>(fromNode,
 				toNode);
