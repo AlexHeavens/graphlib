@@ -1,21 +1,20 @@
 package net.alexheavens.graphlib.graph;
 
-public class SimpleEdgeFactory<DataClass> implements EdgeFactory<DataClass> {
+public class SimpleEdgeFactory<DataClass> implements EdgeFactory<SimpleNode<DataClass>,SimpleEdge<DataClass>> {
 
-	public AbstractEdge<DataClass> generate(AbstractGraph<DataClass> graph, AbstractNode<DataClass> fromNode,
-			AbstractNode<DataClass> toNode) {
+	public SimpleEdge<DataClass> generate(SimpleNode<DataClass> fromNode,
+			SimpleNode<DataClass> toNode) {
 
-		return new SimpleEdge<>(graph, fromNode, toNode);
+		return new SimpleEdge<>(fromNode, toNode);
 	}
 	
 	@Override
-	public AbstractEdge<DataClass> generate(final AbstractEdgeFactoryParameterSet<DataClass> generateParameters){
+	public SimpleEdge<DataClass> generate(final AbstractEdgeFactoryParameterSet<SimpleNode<DataClass>,SimpleEdge<DataClass>> generateParameters){
 		
-		final AbstractGraph<DataClass> graph = generateParameters.getGraph();
-		final AbstractNode<DataClass> fromNode = generateParameters.getFromNode();
-		final AbstractNode<DataClass> toNode = generateParameters.getToNode();
+		final SimpleNode<DataClass> fromNode = generateParameters.getFromNode();
+		final SimpleNode<DataClass> toNode = generateParameters.getToNode();
 		
-		return new SimpleEdge<>(graph, fromNode, toNode);
+		return generate(fromNode, toNode);
 	}
 
 }

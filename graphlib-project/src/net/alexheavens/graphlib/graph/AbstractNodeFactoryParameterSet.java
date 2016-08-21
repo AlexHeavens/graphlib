@@ -2,26 +2,17 @@ package net.alexheavens.graphlib.graph;
 
 import net.alexheavens.graphlib.adt.factory.AbstractDataTypeParameterSet;
 
-public class AbstractNodeFactoryParameterSet<DataClass> implements AbstractDataTypeParameterSet {
+public class AbstractNodeFactoryParameterSet<NodeClass extends Node<NodeClass, EdgeClass, GraphClass>, EdgeClass extends Edge<NodeClass,EdgeClass,GraphClass>, GraphClass extends Graph<NodeClass, EdgeClass, GraphClass>>
+		implements AbstractDataTypeParameterSet {
 
-	private final AbstractGraph<DataClass> graph;
-	private final DataClass nodeData;
+	private final GraphClass graph;
 
-	public AbstractNodeFactoryParameterSet(final AbstractGraph<DataClass> graph, final DataClass nodeData) {
-		if (graph == null)
-			throw new NullPointerException("graph");
-		if (nodeData == null)
-			throw new NullPointerException("nodeData");
-		this.graph = graph;
-		this.nodeData = nodeData;
-	}
-
-	public AbstractGraph<DataClass> getGraph() {
+	public GraphClass getGraph() {
 		return graph;
 	}
 
-	public DataClass getNodeData() {
-		return nodeData;
+	public AbstractNodeFactoryParameterSet(final GraphClass graph) {
+		this.graph = graph;
 	}
 
 }

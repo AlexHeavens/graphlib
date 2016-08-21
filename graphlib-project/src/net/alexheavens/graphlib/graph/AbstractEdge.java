@@ -5,32 +5,32 @@ package net.alexheavens.graphlib.graph;
  * 
  * @author Alexander Heavens
  *
- * @param <DataClass> Datatype stored at each node in the graph.
+ * @param <DataClass>
+ *            Datatype stored at each node in the graph.
  */
-public abstract class AbstractEdge<DataClass> implements Edge<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
+public abstract class AbstractEdge<NodeClass extends Node<NodeClass, EdgeClass, GraphClass>, EdgeClass extends Edge<NodeClass, EdgeClass, GraphClass>, GraphClass extends Graph<NodeClass, EdgeClass, GraphClass>>
+		implements Edge<NodeClass, EdgeClass, GraphClass> {
 
-	private final AbstractGraph<DataClass> graph;
-	private final AbstractNode<DataClass> fromNode;
-	private final AbstractNode<DataClass> toNode;
+	private final NodeClass fromNode;
+	private final NodeClass toNode;
 
-	public AbstractEdge(AbstractGraph<DataClass> graph, AbstractNode<DataClass> fromNode, AbstractNode<DataClass> toNode) {
-		this.graph = graph;
+	public AbstractEdge(NodeClass fromNode, NodeClass toNode) {
 		this.fromNode = fromNode;
 		this.toNode = toNode;
 	}
 
 	@Override
-	public AbstractGraph<DataClass> getGraph() {
-		return graph;
+	public GraphClass getGraph() {
+		return fromNode.getGraph();
 	}
 
 	@Override
-	public AbstractNode<DataClass> getFromNode() {
+	public NodeClass getFromNode() {
 		return fromNode;
 	}
 
 	@Override
-	public AbstractNode<DataClass> getToNode() {
+	public NodeClass getToNode() {
 		return toNode;
 	}
 

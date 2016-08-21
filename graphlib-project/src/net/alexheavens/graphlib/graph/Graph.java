@@ -12,7 +12,7 @@ import net.alexheavens.graphlib.adt.AbstractDataType;
  * @param <EdgeClass>
  * @param <DataClass>
  */
-public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, DataClass>, EdgeClass extends Edge<NodeClass, EdgeClass, DataClass>, DataClass>
+public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, GraphClass>, EdgeClass extends Edge<NodeClass,EdgeClass,GraphClass>,GraphClass extends Graph<NodeClass,EdgeClass,GraphClass>>
 		extends AbstractDataType {
 
 	/**
@@ -59,7 +59,7 @@ public interface Graph<NodeClass extends Node<NodeClass, EdgeClass, DataClass>, 
 
 	public EdgeClass getEdge(NodeClass fromNode, NodeClass toNode);
 
-	public NodeClass addNode(DataClass data);
+	public NodeClass addNode(AbstractNodeFactoryParameterSet<NodeClass,EdgeClass,GraphClass> nodeGenParams);
 
 	public EdgeClass addEdge(NodeClass fromNode, NodeClass toNode);
 

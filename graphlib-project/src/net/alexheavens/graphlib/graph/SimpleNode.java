@@ -1,9 +1,19 @@
 package net.alexheavens.graphlib.graph;
 
-public class SimpleNode<DataClass> extends AbstractNode<DataClass> {
+public class SimpleNode<DataClass> extends AbstractNode<SimpleNode<DataClass>, SimpleEdge<DataClass>, SimpleGraph<DataClass>> {
 
-	public SimpleNode(AbstractGraph<DataClass> graph, DataClass data) {
-		super(graph, data);
+	private DataClass data;
+
+	public SimpleNode(final SimpleGraph<DataClass> graph, final DataClass data) {
+		super(graph);
+	}
+
+	public DataClass getData() {
+		return data;
+	}
+
+	public void setData(DataClass data) {
+		this.data = data;
 	}
 
 }

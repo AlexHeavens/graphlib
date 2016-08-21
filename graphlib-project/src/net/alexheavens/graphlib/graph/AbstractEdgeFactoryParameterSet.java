@@ -2,25 +2,21 @@ package net.alexheavens.graphlib.graph;
 
 import net.alexheavens.graphlib.adt.factory.AbstractDataTypeParameterSet;
 
-public class AbstractEdgeFactoryParameterSet<DataClass> implements AbstractDataTypeParameterSet {
+public class AbstractEdgeFactoryParameterSet<NodeClass extends Node<NodeClass,EdgeClass,?>, EdgeClass extends Edge<NodeClass,EdgeClass,?>> implements AbstractDataTypeParameterSet {
 	
-	private final AbstractNode<DataClass> fromNode;
-	private final AbstractNode<DataClass> toNode;
+	private final NodeClass fromNode;
+	private final NodeClass toNode;
 	
-	public AbstractEdgeFactoryParameterSet(final AbstractNode<DataClass> fromNode, final AbstractNode<DataClass> toNode){
+	public AbstractEdgeFactoryParameterSet(final NodeClass fromNode, final NodeClass toNode){
 		this.fromNode = fromNode;
 		this.toNode = toNode;
 	}
-
-	public AbstractGraph<DataClass> getGraph(){
-		return fromNode.getGraph();
-	}
 	
-	public AbstractNode<DataClass> getFromNode(){
+	public NodeClass getFromNode(){
 		return fromNode;
 	}
 	
-	public AbstractNode<DataClass> getToNode(){
+	public NodeClass getToNode(){
 		return toNode;
 	}
 	

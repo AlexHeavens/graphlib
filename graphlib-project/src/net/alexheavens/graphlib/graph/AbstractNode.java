@@ -11,30 +11,32 @@ import java.util.Set;
  * @param <DataClass>
  *            Datatype stored at each node in the graph.
  */
-public abstract class AbstractNode<DataClass>
-		implements Node<AbstractNode<DataClass>, AbstractEdge<DataClass>, DataClass> {
+public abstract class AbstractNode<NodeClass extends Node<NodeClass, EdgeClass, GraphClass>, EdgeClass extends Edge<NodeClass,EdgeClass,GraphClass>,GraphClass extends Graph<NodeClass,EdgeClass,GraphClass>>
+		implements Node<NodeClass,EdgeClass,GraphClass> {
 
-	private final AbstractGraph<DataClass> graph;
-	private final DataClass data;
+	private final GraphClass graph;
 
-	public AbstractNode(final AbstractGraph<DataClass> graph, final DataClass data) {
+	private NodeClass self(){
+		return (NodeClass) this;
+	}
+	
+	public AbstractNode(final GraphClass graph) {
 		this.graph = graph;
-		this.data = data;
 	}
 
 	private boolean isAttached() {
-		return graph.containsNode(this);
+		return graph.containsNode(self());
 	}
 
 	@Override
-	public AbstractGraph<DataClass> getGraph() {
+	public GraphClass getGraph() {
 		return graph;
 	}
 
 	@Override
-	public Set<AbstractEdge<DataClass>> getEdgeSet() {
+	public Set<EdgeClass> getEdgeSet() {
 
-		final Set<AbstractEdge<DataClass>> edgeSet;
+		final Set<EdgeClass> edgeSet;
 		if (isAttached()) {
 			edgeSet = graph.getEdgeSet();
 		} else {
@@ -43,11 +45,6 @@ public abstract class AbstractNode<DataClass>
 
 		return edgeSet;
 
-	}
-
-	@Override
-	public DataClass getData() {
-		return data;
 	}
 
 	@Override
