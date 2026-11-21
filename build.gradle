@@ -1,0 +1,36 @@
+plugins {
+	id 'java-library'
+}
+
+repositories {
+	mavenCentral()
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+dependencies {
+	testImplementation 'junit:junit:4.13.2'
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'graphlib-project/src'
+		}
+	}
+
+	test {
+		java {
+			srcDir 'graphlib-project/test'
+		}
+	}
+}
+
+// The compiler is the Java linter: every -Xlint category fails the build.
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs << '-Xlint:all' << '-Werror'
+}
