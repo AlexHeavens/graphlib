@@ -29,3 +29,8 @@ sourceSets {
 		}
 	}
 }
+
+// The compiler is the Java linter: every -Xlint category fails the build.
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs << '-Xlint:all' << '-Werror'
+}
